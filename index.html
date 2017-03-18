@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Casio Graph</title>
+
+	<link href="Styles/main.css" rel="stylesheet" type="text/css" media="screen"/>
+
+	<script type="text/javascript" src="Scripts/Canvas.js"></script>
+	<script type="text/javascript" src="Scripts/main.js"></script>
+
+</head>
+<body>
+
+	<canvas id="canvas"></canvas>
+
+
+	<div id="settings">
+		<div>
+			<button id="playPause">Pause</button>
+
+			<input type="range" id="x" min="-5" max="5">
+			<input type="range" id="y" min="-5" max="5">
+
+			<label id="accuracyLabel">Accuracy</label>
+			<input type="range" id="accuracy" min="1" max="20" value="5">
+
+			<button id="calc">Calc</button>
+		</div>
+
+		<div id="equations">
+			<button id="addEquation">+</button>
+
+			<p>Press the 'calc' button at the left to generate the changes</p>
+
+			<div>
+				<select>
+					<option value="0">y=(a)x^(sqn)+(b)x+(c)</option>
+				</select>
+
+				<label for="a">a</label>
+				<input type="number" name="a" id="a" value="1">
+				<label for="sqn">sqn</label>
+				<input type="number" name="sqn" id="sqn" value="2">
+				<label for="b">b</label>
+				<input type="number" name="b" id="b" value="0">
+				<label for="c">c</label>
+				<input type="number" name="c" id="c" value="-3">
+			</div>
+		</div>
+
+		<div id="viewport">
+			xMin
+			<input type="number" id="xMin" value="-5">
+			xMax
+			<input type="number" id="xMax" value="5">
+			yMin
+			<input type="number" id="yMin" value="-5">
+			yMax
+			<input type="number" id="yMax" value="5">
+
+			<button id="updateViewport">Update</button>
+		</div>
+
+	</div>
+
+</body>
+</html>

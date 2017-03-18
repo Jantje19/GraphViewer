@@ -1,0 +1,38 @@
+body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+input {
+	margin: 5% 0;
+	display: block;
+}
+
+#addEquation {
+	width: 90%;
+	margin-bottom: 5%;
+}
+
+#settings {
+	display: flex;
+}
+
+#settings div {
+	flex: 1;
+}
+
+#settings div div {
+	flex: 0;
+	margin-bottom: 5%;
+	background-color: lightgray;
+}
+
+#settings div div select {
+	display: block;
+}
+
+#accuracy {
+	direction: rtl;
+}
