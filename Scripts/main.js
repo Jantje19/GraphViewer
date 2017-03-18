@@ -126,6 +126,7 @@ function getPoints(formula, a, b, c, sqn) {
 		let x = i.map(0, (xMax - xMin), xMin, xMax);
 
 		if (formula == 0) y = a * Math.pow(x, sqn) + b * x + c;
+		else if (formula == 1) y = a * Math.sin(x / sqn) + b * x + c;
 		else y = Math.pow(x, 2) - 3;
 
 		const pos = new Vector(x, y).viewPort();
