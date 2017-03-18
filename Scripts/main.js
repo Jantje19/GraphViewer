@@ -60,14 +60,6 @@ function setup() {
 		evt.target.parentElement.appendChild(div);
 	});
 
-	document.getElementById('x-call').addEventListener('change', evt => {
-		// TODO
-	});
-
-	document.getElementById('y-call').addEventListener('change', evt => {
-		// TODO
-	});
-
 	window.addEventListener('keydown', evt => {
 		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc(); evt.preventDefault(); updateVWindow()}
 		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc(); evt.preventDefault(); updateVWindow()}
