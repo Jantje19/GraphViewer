@@ -36,10 +36,8 @@
 			<p>Press the 'calc' button on the left to generate the changes</p>
 
 			<div>
-				<select>
-					<option value="0">y=(a)x^(sqn)+(b)x+(c)</option>
-					<option value="1">y=(a) * sin(x / sqn) + (b) * x + (c)</option>
-				</select>
+				<label for="equation">Y=</label>
+				<input type="text" id="equation" value="x^2 + b * x + c">
 
 				<label for="a">a</label>
 				<input type="number" name="a" id="a" value="1">
@@ -63,6 +61,13 @@
 			<input type="number" id="yMax" value="5">
 
 			<button id="updateViewport">Update</button>
+		</div>
+
+		<div id="g-solve">
+			get Y from X:
+			<input type="number" id="x-call">
+			get X from Y:
+			<input type="number" id="y-call">
 		</div>
 
 	</div>

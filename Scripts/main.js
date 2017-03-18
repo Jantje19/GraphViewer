@@ -60,6 +60,14 @@ function setup() {
 		evt.target.parentElement.appendChild(div);
 	});
 
+	document.getElementById('x-call').addEventListener('change', evt => {
+
+	});
+
+	document.getElementById('y-call').addEventListener('change', evt => {
+
+	});
+
 	window.addEventListener('keydown', evt => {
 		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc(); evt.preventDefault();}
 		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc(); evt.preventDefault();}
@@ -114,7 +122,11 @@ function calc() {
 		const b = Number(object.querySelector('#b').value);
 		const c = Number(object.querySelector('#c').value);
 		const sqn = Number(object.querySelector('#sqn').value);
-		const formula = Number(object.querySelector('select').value);
+		let formula = object.querySelector('#equation').value;
+
+		formula = formula.replace(/([0-9]+|\w+)\^([0-9]+|\w+)/, 'Math.pow($1, $2)');
+
+		try {eval(formula)} catch(err) {alert(err); formula = 2};
 
 		graphs.push(getPoints(formula, a, b, c, sqn));
 	});
@@ -128,9 +140,11 @@ function getPoints(formula, a, b, c, sqn) {
 		let y = 0;
 		let x = i.map(0, (xMax - xMin), xMin, xMax);
 
-		if (formula == 0) y = a * Math.pow(x, sqn) + b * x + c;
-		else if (formula == 1) y = a * Math.sin(x / sqn) + b * x + c;
-		else y = Math.pow(x, 2) - 3;
+		try {
+			y = eval(formula);
+		} catch(err) {
+			y = 0;
+		}
 
 		const pos = new Vector(x, y).viewPort();
 
