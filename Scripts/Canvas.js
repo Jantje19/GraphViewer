@@ -184,7 +184,17 @@ class Canvas {
 		return this;
 	}
 
-	text(text, x, y) {
+	text(text, x, y, color) {
+		if (!color) {
+			color = 'rgb(255, 255, 255)';
+		}
+
+		if ((typeof color).toLowerCase() == 'object') {
+			this.ctx.fillStyle = color.color;
+		} else {
+			this.ctx.fillStyle = color;
+		}
+
 		this.ctx.fillText(text, x, y);
 	}
 

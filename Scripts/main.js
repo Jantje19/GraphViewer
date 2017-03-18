@@ -1,5 +1,6 @@
 /*
-- Add numbers on axies
+- G-Solve
+- Show numbers improvement on axies
 */
 
 
@@ -142,8 +143,21 @@ function getPoints(formula, a, b, c, sqn) {
 function axies() {
 	const x = 0;
 	const y = 0;
+	const indicatorLinesLen = 5;
 	const pos = new Vector().viewPort();
 
 	canvas.line(pos.x, 0, pos.x, canvas.height, 1, 'white');
 	canvas.line(0, pos.y, canvas.width, pos.y, 1, 'white');
+
+	for (let i = xMin; i < (xMax - xMin); i++) {
+		const pos = new Vector(i, 0).viewPort();
+		canvas.line(pos.x, pos.y - indicatorLinesLen, pos.x, pos.y + indicatorLinesLen, 1, 'white');
+		canvas.text(i, pos.x - 3, pos.y + 13);
+	}
+
+	for (let i = yMin; i < (yMax - yMin); i++) {
+		const pos = new Vector(0, i).viewPort();
+		canvas.line(pos.x - indicatorLinesLen, pos.y, pos.x + indicatorLinesLen, pos.y, 1, 'white');
+		canvas.text(i, pos.x + 6, pos.y + 3);
+	}
 }
