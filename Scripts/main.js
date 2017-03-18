@@ -27,6 +27,8 @@ function setup() {
 	document.getElementById('y').min = yMin;
 	document.getElementById('y').max = yMax;
 
+	alert('Use scrollwheel to zoom.\nUse up/down/left/right keys to change the viewport.');
+
 	document.getElementById('calc').addEventListener('click', calc);
 
 	document.getElementById('accuracy').addEventListener('change', evt => {
@@ -57,11 +59,11 @@ function setup() {
 		evt.target.parentElement.appendChild(div);
 	});
 
-	window.addEventListener('keyup', evt => {
-		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc();}
-		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc();}
-		if (evt.key == 'ArrowLeft') {xMin--; xMax--; calc();}
-		if (evt.key == 'ArrowRight') {xMin++; xMax++; calc();}
+	window.addEventListener('keydown', evt => {
+		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc(); evt.preventDefault();}
+		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc(); evt.preventDefault();}
+		if (evt.key == 'ArrowLeft') {xMin--; xMax--; calc(); evt.preventDefault();}
+		if (evt.key == 'ArrowRight') {xMin++; xMax++; calc(); evt.preventDefault();}
 	});
 
 	canvas.canvas.addEventListener('wheel', evt => {
