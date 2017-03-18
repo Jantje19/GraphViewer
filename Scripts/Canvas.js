@@ -37,6 +37,8 @@ function resize() {
 	}
 
 	canvas.resize(newW, newH);
+
+	calc();
 }
 
 function mouse(evt) {

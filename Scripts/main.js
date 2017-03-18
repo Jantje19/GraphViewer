@@ -18,7 +18,7 @@ Vector.prototype.viewPort = function() {
 }
 
 function setup() {
-	canvas = new Canvas(document.getElementById('canvas'), document.body.scrollHeight / 2, document.body.scrollHeight / 2);
+	canvas = new Canvas(document.getElementById('canvas'), 'auto', document.body.scrollHeight / 2);
 
 	calc();
 
