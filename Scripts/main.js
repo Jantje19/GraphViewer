@@ -28,7 +28,7 @@ function setup() {
 	document.getElementById('y').min = yMin;
 	document.getElementById('y').max = yMax;
 
-	alert('Use scrollwheel to zoom.\nUse up/down/left/right keys to change the viewport.');
+	alert('Use scrollwheel to zoom.\nUse up/down/left/right keys to change the viewport.\nIn the equation input only use js Math functions');
 
 	document.getElementById('calc').addEventListener('click', calc);
 
