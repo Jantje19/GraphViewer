@@ -69,10 +69,10 @@ function setup() {
 	});
 
 	window.addEventListener('keydown', evt => {
-		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc(); evt.preventDefault();}
-		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc(); evt.preventDefault();}
-		if (evt.key == 'ArrowLeft') {xMin--; xMax--; calc(); evt.preventDefault();}
-		if (evt.key == 'ArrowRight') {xMin++; xMax++; calc(); evt.preventDefault();}
+		if (evt.key == 'ArrowUp') {yMin--; yMax--; calc(); evt.preventDefault(); updateVWindow()}
+		if (evt.key == 'ArrowDown') {yMin++; yMax++; calc(); evt.preventDefault(); updateVWindow()}
+		if (evt.key == 'ArrowLeft') {xMin--; xMax--; calc(); evt.preventDefault(); updateVWindow()}
+		if (evt.key == 'ArrowRight') {xMin++; xMax++; calc(); evt.preventDefault(); updateVWindow()}
 	});
 
 	canvas.canvas.addEventListener('wheel', evt => {
@@ -86,6 +86,7 @@ function setup() {
 			}
 
 			calc();
+			updateVWindow();
 		}
 	});
 }
@@ -124,6 +125,7 @@ function calc() {
 		const sqn = Number(object.querySelector('#sqn').value);
 		let formula = object.querySelector('#equation').value;
 
+		formula = formula.replace(/sin(\s|\()\-?([0-9]+|\w)\)?/, 'Math.sin($2)');
 		formula = formula.replace(/([0-9]+|\w+)\^([0-9]+|\w+)/, 'Math.pow($1, $2)');
 
 		try {eval(formula)} catch(err) {alert(err); formula = 2};
@@ -174,4 +176,11 @@ function axies() {
 		canvas.line(pos.x - indicatorLinesLen, pos.y, pos.x + indicatorLinesLen, pos.y, 1, 'white');
 		canvas.text(i, pos.x + 6, pos.y + 3);
 	}
+}
+
+function updateVWindow() {
+	document.getElementById('xMax').value = xMax;
+	document.getElementById('yMax').value = yMax;
+	document.getElementById('xMin').value = xMin;
+	document.getElementById('yMin').value = yMin;
 }
