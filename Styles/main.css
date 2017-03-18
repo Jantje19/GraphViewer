@@ -2,7 +2,10 @@ body {
 	margin: 0;
 	width: 100%;
 	height: 100%;
+	text-align: center;
 	position: absolute;
+	font-family: 'Arial', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 input {
@@ -17,6 +20,7 @@ input {
 
 #settings {
 	display: flex;
+	text-align: left;
 }
 
 #settings div {
