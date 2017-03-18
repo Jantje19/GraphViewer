@@ -61,11 +61,11 @@ function setup() {
 	});
 
 	document.getElementById('x-call').addEventListener('change', evt => {
-
+		// TODO
 	});
 
 	document.getElementById('y-call').addEventListener('change', evt => {
-
+		// TODO
 	});
 
 	window.addEventListener('keydown', evt => {
@@ -159,19 +159,24 @@ function getPoints(formula, a, b, c, sqn) {
 function axies() {
 	const x = 0;
 	const y = 0;
+	let addNumX = 1;
+	let addNumY = 1;
 	const indicatorLinesLen = 5;
 	const pos = new Vector().viewPort();
 
 	canvas.line(pos.x, 0, pos.x, canvas.height, 1, 'white');
 	canvas.line(0, pos.y, canvas.width, pos.y, 1, 'white');
 
-	for (let i = xMin; i < (xMax - xMin); i++) {
+	if ((xMax - xMin) / 30 >= 1) addNumX += Math.floor((xMax - xMin) / 30);
+	if ((yMax - yMin) / 30 >= 1) addNumY += Math.floor((yMax - yMin) / 30);
+
+	for (let i = xMin; i < (xMax - xMin); i += addNumX) {
 		const pos = new Vector(i, 0).viewPort();
 		canvas.line(pos.x, pos.y - indicatorLinesLen, pos.x, pos.y + indicatorLinesLen, 1, 'white');
 		canvas.text(i, pos.x - 3, pos.y + 13);
 	}
 
-	for (let i = yMin; i < (yMax - yMin); i++) {
+	for (let i = yMin; i < (yMax - yMin); i += addNumY) {
 		const pos = new Vector(0, i).viewPort();
 		canvas.line(pos.x - indicatorLinesLen, pos.y, pos.x + indicatorLinesLen, pos.y, 1, 'white');
 		canvas.text(i, pos.x + 6, pos.y + 3);
