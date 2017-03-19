@@ -24,7 +24,7 @@
 			Cursor y:
 			<input type="range" id="y" min="-5" max="5">
 
-			<label id="accuracyLabel">Accuracy</label>
+			<label id="accuracyLabel">Accuracy: 0.8</label>
 			<input type="range" id="accuracy" min="1" max="20" value="5">
 
 			<button id="calc">Calc</button>
@@ -37,7 +37,7 @@
 
 			<div>
 				<label for="equation">Y=</label>
-				<input type="text" id="equation" value="x^sqn + b * x + c">
+				<input type="text" id="equation" value="a * x^sqn + b * x + c">
 
 				<label for="a">a</label>
 				<input type="number" name="a" id="a" value="1">
@@ -47,6 +47,24 @@
 				<input type="number" name="b" id="b" value="0">
 				<label for="c">c</label>
 				<input type="number" name="c" id="c" value="-3">
+
+				<button id="remove">Remove</button>
+			</div>
+
+			<div>
+				<label for="equation">Y=</label>
+				<input type="text" id="equation" value="a * x^sqn + b * x + c">
+
+				<label for="a">a</label>
+				<input type="number" name="a" id="a" value="1">
+				<label for="sqn">sqn</label>
+				<input type="number" name="sqn" id="sqn" value="2">
+				<label for="b">b</label>
+				<input type="number" name="b" id="b" value="5">
+				<label for="c">c</label>
+				<input type="number" name="c" id="c" value="8">
+
+				<button id="remove">Remove</button>
 			</div>
 		</div>
 

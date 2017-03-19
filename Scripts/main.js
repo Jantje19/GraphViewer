@@ -1,6 +1,5 @@
 /*
 - G-Solve
-- Show numbers improvement on axies
 */
 
 
@@ -10,7 +9,11 @@ let xMin = -5;
 let yMin = -5;
 let graphs = [];
 
-const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'white'];
+let gSolveX = -10;
+let gSolveY = -10;
+
+const worker = new Worker('Scripts/GSolve.js');
+const colors = ['red', 'blue', 'lightgreen', 'yellow', 'purple', 'white'];
 
 Vector.prototype.viewPort = function() {
 	this.x = Math.floor(this.x.map(xMin, xMax, 0, canvas.width));
@@ -22,6 +25,7 @@ function setup() {
 	canvas = new Canvas(document.getElementById('canvas'), 'auto', document.body.scrollHeight / 2);
 
 	calc();
+	updateRemoveButtons();
 
 	document.getElementById('x').min = xMin;
 	document.getElementById('x').max = xMax;
@@ -33,7 +37,7 @@ function setup() {
 	document.getElementById('calc').addEventListener('click', calc);
 
 	document.getElementById('accuracy').addEventListener('change', evt => {
-		document.getElementById('accuracyLabel').innerText = 'Accuracy: ' + Number(evt.target.value).map(1, 20, 20, 1) / 10;
+		document.getElementById('accuracyLabel').innerText = 'Accuracy: ' + Number(evt.target.value).map(1, 20, 20, 1) / 20;
 	});
 
 	document.getElementById('playPause').addEventListener('click', evt => {
@@ -58,6 +62,7 @@ function setup() {
 	document.getElementById('addEquation').addEventListener('click', evt => {
 		const div = evt.target.parentElement.querySelector('div').cloneNode(true);
 		evt.target.parentElement.appendChild(div);
+		updateRemoveButtons();
 	});
 
 	window.addEventListener('keydown', evt => {
@@ -81,6 +86,17 @@ function setup() {
 			updateVWindow();
 		}
 	});
+
+	worker.onerror = evt => {
+		console.warn(evt);
+	}
+
+	worker.onmessage = evt => {
+		evt.data.forEach((object, key) => {
+			gSolveX = object.x;
+			gSolveY = object.y;
+		});
+	}
 }
 
 function draw() {
@@ -98,12 +114,13 @@ function draw() {
 		for (let i = 0; i < object.length - 1; i++) {
 			const first = object[i];
 			const second = object[i + 1];
-			const col = colors[key.map(0, graphs.length, 0, colors.length - 1)];
+			const col = colors[key]; // key.map(0, graphs.length, 0, colors.length - 1)
 
 			canvas.line(first.x, first.y, second.x, second.y, 1, col);
 		}
 	});
 
+	canvas.circle(gSolveX, gSolveY, 3, 'orange', true);
 	canvas.text(`x: ${x} y: ${y}`, pos.x, pos.y - 5);
 }
 
@@ -124,11 +141,13 @@ function calc() {
 
 		graphs.push(getPoints(formula, a, b, c, sqn));
 	});
+
+	worker.postMessage({points: graphs});
 }
 
 function getPoints(formula, a, b, c, sqn) {
 	const points = [];
-	const accuracy = Number(document.getElementById('accuracy').value) / 10;
+	const accuracy = Number(document.getElementById('accuracy').value) / 20;
 
 	for (let i = 0; i < (xMax - xMin); i += accuracy) {
 		let y = 0;
@@ -180,4 +199,13 @@ function updateVWindow() {
 	document.getElementById('yMax').value = yMax;
 	document.getElementById('xMin').value = xMin;
 	document.getElementById('yMin').value = yMin;
+}
+
+function updateRemoveButtons() {
+	document.getElementById('equations').querySelectorAll('#remove').forEach((object, key) => {
+		object.addEventListener('click', evt => {
+			if (evt.target.parentElement.parentElement.querySelectorAll('div').length > 1)
+				setTimeout(() => {evt.target.parentElement.remove()}, 10);
+		});
+	});
 }
