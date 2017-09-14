@@ -9,9 +9,7 @@ let xMin = -5;
 let yMin = -5;
 let graphs = [];
 
-let gSolveX = -10;
-let gSolveY = -10;
-
+const gSolve = [];
 const worker = new Worker('Scripts/GSolve.js');
 const colors = ['red', 'blue', 'lightgreen', 'yellow', 'purple', 'white'];
 
@@ -92,9 +90,13 @@ function setup() {
 	}
 
 	worker.onmessage = evt => {
+		gSolve.length = 0;
+
 		evt.data.forEach((object, key) => {
-			gSolveX = object.x;
-			gSolveY = object.y;
+			gSolve.push({
+				x: object.x,
+				y: object.y
+			})
 		});
 	}
 }
@@ -120,7 +122,10 @@ function draw() {
 		}
 	});
 
-	canvas.circle(gSolveX, gSolveY, 3, 'orange', true);
+	gSolve.forEach((object, key) => {
+		canvas.circle(object.x, object.y, 3, 'orange', true);
+	});
+
 	canvas.text(`x: ${x} y: ${y}`, pos.x, pos.y - 5);
 }
 
